@@ -1,0 +1,13 @@
+# Site settings
+title: Make it Code
+owner: Afonso F. Garcia
+email: me@afonsogarcia.pt
+description: "Make it Code is a website about everything that comes to my mind and is worthy (or not) of publication to the collective knowledge of mankind that is the Internet."
+baseurl: ""
+url: "http://www.afonsogarcia.pt"
+twitter_username: AfonsoFGarcia
+github_username:  AfonsoFGarcia
+
+# Build settings
+markdown: kramdown
+permalink: pretty
