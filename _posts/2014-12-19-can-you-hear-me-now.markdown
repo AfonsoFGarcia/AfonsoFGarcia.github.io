@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Can you hear me now?"
-date:   2014-12-19 17:39:10
+date:   2014-12-19 02:15:00
 categories: programming java music
 ---
 
@@ -88,7 +88,7 @@ public static String byteToNote(byte b) {
 }
 {% endhighlight %}
 
-Now, each byte is encoded in a unique way, that can be converted back to its byte interpretation, while producing a set of notes than can be easily listened to and in a way that isn't too repetitive. I've fulfilled both goals. MIDI also allows to define the instrument that should be synthesized when playing so, just for fun, I wrote a method to set the instrument based on the first byte.
+Now, each byte is encoded in a unique way, that can be converted back to its byte interpretation, while producing a set of notes than can be easily listened to and in a way that isn't too repetitive. I've fulfilled both goals. MIDI also allows to define the instrument that should be synthesized when playing, so, just for fun, I wrote a method to set the instrument based on the first byte.
 
 {% highlight java %}
 public static String getInstrument(byte[] b) {
