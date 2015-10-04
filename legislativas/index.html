@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+	</head>
+	<body>
+		<div ng-app="legislativas" ng-controller="legislativasCtrl">
+			<select ng-model="selected" ng-change="update()">
+				<option ng-repeat="x in resultados | orderBy:'+circulo'" value="{{ x.partidos }}">
+					{{ x.circulo }}
+				</option>
+			</select>
+			<table ng-show="selected" border="1">
+				<thead>
+					<tr>
+						<td>Força Pol&iacute;tica</td>
+						<td>Vota&ccedil;&atilde;o</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="x in partidos | orderBy:'-percentagem'">
+						<td>{{ x.nome }}</td>
+						<td align="right">{{ x.percentagem | number: 2 }}%</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+		<script>
+			var app = angular.module('legislativas', []);
+			app.controller('legislativasCtrl', function($scope, $http) {
+				$http.get("resultados.js").success(function(response) {
+					$scope.resultados = response;
+				});
+				$scope.update = function() {
+					$scope.partidos = JSON.parse($scope.selected);
+				}
+			});
+		</script>
+	</body>
+</html>
