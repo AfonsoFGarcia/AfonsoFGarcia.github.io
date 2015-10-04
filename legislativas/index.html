@@ -2,25 +2,29 @@
 <html>
 	<head>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+		<title>Sondagem Reddit - Legislativas 2015</title>
 	</head>
 	<body>
 		<div ng-app="legislativas" ng-controller="legislativasCtrl">
-			<select ng-model="selected" ng-change="update()">
+			C&iacute;rculo Eleitoral: <select ng-model="selected" ng-change="update()">
 				<option ng-repeat="x in resultados | orderBy:'+circulo'" value="{{ x.partidos }}">
 					{{ x.circulo }}
 				</option>
 			</select>
+			<hr>
 			<table ng-show="selected" border="1">
 				<thead>
 					<tr>
 						<td>Força Pol&iacute;tica</td>
 						<td>Vota&ccedil;&atilde;o</td>
+						<td>N&uacute;mero de Votos</td>
 					</tr>
 				</thead>
 				<tbody>
 					<tr ng-repeat="x in partidos | orderBy:'-percentagem'">
 						<td>{{ x.nome }}</td>
 						<td align="right">{{ x.percentagem | number: 2 }}%</td>
+						<td align="right">{{ x.votos }}</td>
 					</tr>
 				</tbody>
 			</table>
