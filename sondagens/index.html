@@ -63,7 +63,7 @@
 		<script>
 			var app = angular.module('legislativas', []);
 			app.controller('legislativasCtrl', function($scope, $http) {
-				$http.get("resultados.json").success(function(response) {
+				$http.get("2015.json").success(function(response) {
 					$scope.resultados = response;
 					$scope.orderByField = 'percentagem';
 					$scope.reverseSort = true;
