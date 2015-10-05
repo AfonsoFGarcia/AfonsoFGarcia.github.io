@@ -4,16 +4,47 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
 		<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+		
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-		<meta charset="UTF-8"> 
+		<meta charset="UTF-8">
+		
 		<title>Sondagem Reddit</title>
+		
 		<style>
 			body {
 				padding-top: 70px;
 			}
 		</style>
+		
+		<script>
+			var app = angular.module('legislativas', []);
+			app.controller('legislativasCtrl', function($scope, $rootScope, $http) {
+				$rootScope.displayResults = 'Legislativas 2015';
+				$http.get("2015.json").success(function(response) {
+					$scope.resultados = response;
+					$scope.orderByField = 'percentagem';
+					$scope.reverseSort = true;
+				});
+				$scope.update = function() {
+					$scope.partidos = JSON.parse($scope.selected);
+				}
+				$scope.order = function(field) {
+					if($scope.orderByField == field) {
+						$scope.reverseSort = !$scope.reverseSort;
+					} else {
+						if(field == 'nome') {
+							$scope.reverseSort = false;
+						} else {
+							$scope.reverseSort = true;
+						}
+						$scope.orderByField = field;
+					}
+				}
+			});
+		</script>
 	</head>
 	<body ng-app="legislativas">
 		<nav class="navbar navbar-default navbar-fixed-top">
@@ -23,13 +54,16 @@
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Eleição <span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="#" ng-click="displayResults=2015">Legislativas 2015</a></li>
+							<li><a href="#" ng-click="displayResults='Legislativas 2015'">Legislativas 2015</a></li>
 						</ul>
 					</li>
 				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><span class="navbar-brand">{{ displayResults }}</span></li>
+				</ul>
 			</div>
 		</nav>
-		<div ng-controller="legislativasCtrl" class="container" ng-show="displayResults == 2015">
+		<div ng-controller="legislativasCtrl" class="container" ng-show="displayResults == 'Legislativas 2015'">
 			<form class="form-horizontal">
 				<div class="form-group">
 					<label class="col-sm-2 control-label">C&iacute;rculo Eleitoral:</label>
@@ -59,32 +93,5 @@
 				</tbody>
 			</table>
 		</div>
-		
-		<script>
-			var app = angular.module('legislativas', []);
-			app.controller('legislativasCtrl', function($scope, $http) {
-				$http.get("2015.json").success(function(response) {
-					$scope.resultados = response;
-					$scope.orderByField = 'percentagem';
-					$scope.reverseSort = true;
-					$scope.displayResults = 2015;
-				});
-				$scope.update = function() {
-					$scope.partidos = JSON.parse($scope.selected);
-				}
-				$scope.order = function(field) {
-					if($scope.orderByField == field) {
-						$scope.reverseSort = !$scope.reverseSort;
-					} else {
-						if(field == 'nome') {
-							$scope.reverseSort = false;
-						} else {
-							$scope.reverseSort = true;
-						}
-						$scope.orderByField = field;
-					}
-				}
-			});
-		</script>
 	</body>
 </html>
