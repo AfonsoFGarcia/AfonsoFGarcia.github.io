@@ -5,7 +5,7 @@
 
       myWorker.onmessage = function(e) {
         console.log(`Message received from worker: ${e.data}`);
-        document.getElementById('primes')insertAdjacentHTML('beforeend', e.data + ' ')
+        document.getElementById('primes').insertAdjacentHTML('beforeend', e.data + ' ')
       }
 
       function getPrimes() {
