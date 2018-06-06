@@ -1,13 +1,24 @@
 <html>
   <head>
-    <script>
+    <script defer>
       let myWorker = new Worker('worker.js');
 
       myWorker.onmessage = function(e) {
         console.log(`Message received from worker: ${e.data}`);
       }
 
-      myWorker.postMessage([10,20]);
+      function getPrimes() {
+        let start = document.getElementById('start').value
+        let end = document.getElementById('end').value
+        myWorker.postMessage([start,end]);
+      }
     </script>
   </head>
+  <body>
+    <input type="number" id="start" placeholder="Start from" />
+    <br>
+    <input type="number" id="end" placeholder="End in" />
+    <br>
+    <button onclick="getPrimes()">Generate prime numbers</button>
+  </body>
 </html>
