@@ -1,17 +1,17 @@
 <html>
   <head>
     <script defer>
-      let myWorker = new Worker('worker.js');
+      let myWorker = new Worker('worker.js')
 
       myWorker.onmessage = function(e) {
-        console.log(`Message received from worker: ${e.data}`);
+        console.log(`Message received from worker: ${e.data}`)
         document.getElementById('primes').insertAdjacentHTML('beforeend', e.data + ' ')
       }
 
       function getPrimes() {
         let start = document.getElementById('start').value
         let end = document.getElementById('end').value
-        document.getElementById('primes').innerHTLM = ''
+        document.getElementById('primes').innerHTML = ''
         myWorker.postMessage([start,end])
       }
     </script>
