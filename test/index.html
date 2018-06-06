@@ -5,12 +5,14 @@
 
       myWorker.onmessage = function(e) {
         console.log(`Message received from worker: ${e.data}`);
+        document.getElementById('primes').innerHTLM += e.data + ' '
       }
 
       function getPrimes() {
         let start = document.getElementById('start').value
         let end = document.getElementById('end').value
-        myWorker.postMessage([start,end]);
+        document.getElementById('primes').innerHTLM = ''
+        myWorker.postMessage([start,end])
       }
     </script>
   </head>
@@ -20,5 +22,7 @@
     <input type="number" id="end" placeholder="End in" />
     <br>
     <button onclick="getPrimes()">Generate prime numbers</button>
+    <hr>
+    <div id="primes"></div>
   </body>
 </html>
